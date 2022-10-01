@@ -1,4 +1,7 @@
 # GROMACS quick usage guide
+
+[![hackmd-github-sync-badge](https://hackmd.io/MvoYXS7ASB-DdNIvSmjPuw/badge)](https://hackmd.io/MvoYXS7ASB-DdNIvSmjPuw)
+
 ## Description
 GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles and is a community-driven project. Contributions are welcome in many forms, including improvements to documentation, patches to fix bugs, advice on the forums, bug reports that let us reproduce the issue, and new functionality. 
 ## Single Node Single GPU
