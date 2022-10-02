@@ -1,11 +1,54 @@
+###### tags: `software` `usage guide`
 # GROMACS quick usage guide
 
 [![hackmd-github-sync-badge](https://hackmd.io/MvoYXS7ASB-DdNIvSmjPuw/badge)](https://hackmd.io/MvoYXS7ASB-DdNIvSmjPuw)
 
 ## Description
-GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles and is a community-driven project. Contributions are welcome in many forms, including improvements to documentation, patches to fix bugs, advice on the forums, bug reports that let us reproduce the issue, and new functionality. 
+GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles and is a community-driven project.
+
+## Installation Status
+
+
+| 功能           | Taiwania1  | Taiwania2     | Taiwania3  | TWCC container | TWCC VM      |
+| :-------------: | :----------: | :-------------: | :----------: | :--------------: | :------------: |
+| native cpu    | 2018.6<br>$$\surd$$  | 2018.6<br>$$\star$$     | 2021.2<br>$$\star$$  | $$\triangle$$     | $$\triangle$$   |
+| native gpu    | $$\times$$  | 2018.6<br>$$\star$$     | $$\times$$  | $$\triangle$$     | $$\triangle$$   |
+| CPU container | $$\triangle$$  | $$\triangle$$ | $$\triangle$$  | $$\triangle$$     | $$\triangle$$   |
+| GPU container | 2022.1<br>$$\star$$ | 2022.1<br>$$\surd$$     | 2022.1<br>$$\star$$ | $$\triangle$$     | $$\triangle$$   |
+
+
+$$\surd \text{ : Tested} $$
+
+
+$$\triangle \text{ : Not Ready} $$
+
+$$\star \text{ : Untested} $$
+
+$$\times \text{ : Not support} $$
+
+$$\bigcirc : $$
+
+## Installation Path
+### Taiwania1
+```/pkg/GROMACS```
+### Taiwania2
+```/opt/ohpc/pkg/gromacs```
+### Taiwania3
+```/opt/ohpc/Taiwania3/pkg/chem/gromacs```
+
+## Basic usage
+### native app
+```
+source setgromacs_2018
+mpirun gmx_mpi mdrun -v ${YOUR_INPUT}
+```
+### container
+Use singularity to run application in container on HPC environment.
+```
+singularity run --nv -B ${PWD}:/host_pwd --pwd /host_pwd ${SIMG} gmx mdrun -v ${YOUR_INPUT}
+```
 ## Single Node Single GPU
-cp 
+
 * #### STEP1  Pull down the Gromacs image
     ```docker pull nvcr.io/hpc/gromacs:2022.1```
 * #### STEP2  Download the subm script
@@ -92,6 +135,25 @@ dataset name
                      -noconfout \
                      -nsteps 5000 \
                      -s topol.tpr
+
+## Fetch image from NGC (optional)
+##### SELECT TAG
+###### Several GROMACS images are available, depending on your needs.
+```
+export GROMACS_TAG={TAG}
+```
+
+###### For example:
+```
+export GROMACS_TAG=2022.1
+```
+##### PULL THE IMAGE
+```
+export GROMACS_SIF=${PWD}/${GROMACS_TAG}.sif
+singularity build ${GROMACS_SIF} docker://nvcr.io/hpc/gromacs:${GROMACS_TAG}
+```
+
+
 
 
 Contributor: YI-CHENG HSIAO
